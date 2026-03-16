@@ -1,0 +1,1894 @@
+html_content = '''<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      R.J.C. Liwag | Technical Project Lead & AWS Cloud Administrator
+    </title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --navy: #1e3a5f;
+        --navy-light: #2c4a6e;
+        --orange: #ff6b35;
+        --orange-hover: #e55a2b;
+        --white: #ffffff;
+        --gray-light: #f8f9fa;
+        --gray-medium: #6c757d;
+        --gray-dark: #343a40;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        line-height: 1.6;
+        color: var(--gray-dark);
+        background-color: var(--white);
+        overflow-x: hidden;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Playfair Display", serif;
+        font-weight: 600;
+        line-height: 1.2;
+      }
+
+      /* Navigation */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        padding: 1rem 0;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        transition: var(--transition);
+      }
+
+      nav.scrolled {
+        padding: 0.5rem 0;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-family: "Playfair Display", serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--navy);
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--gray-dark);
+        font-weight: 500;
+        font-size: 0.9rem;
+        transition: var(--transition);
+        position: relative;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--orange);
+        transition: var(--transition);
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .nav-links a:hover {
+        color: var(--navy);
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(
+          135deg,
+          var(--navy) 0%,
+          var(--navy-light) 100%
+        );
+        color: var(--white);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 800px;
+        height: 800px;
+        background: radial-gradient(
+          circle,
+          rgba(255, 107, 53, 0.1) 0%,
+          transparent 70%
+        );
+        animation: pulse 4s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+        50% {
+          transform: scale(1.1);
+          opacity: 0.8;
+        }
+      }
+
+      .hero-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-subtitle {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: var(--orange);
+        margin-bottom: 1rem;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease forwards;
+      }
+
+      .hero-title {
+        font-size: 4rem;
+        margin-bottom: 1.5rem;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease 0.2s forwards;
+      }
+
+      .hero-tagline {
+        font-size: 2.5rem;
+        font-weight: 300;
+        margin-bottom: 2rem;
+        opacity: 0;
+        height: 3.5rem;
+        overflow: hidden;
+      }
+
+      .tagline-text {
+        display: inline-block;
+        animation: slideUp 3s ease-in-out infinite;
+      }
+
+      @keyframes slideUp {
+        0%,
+        33% {
+          transform: translateY(0);
+        }
+        36%,
+        66% {
+          transform: translateY(-3.5rem);
+        }
+        69%,
+        100% {
+          transform: translateY(-7rem);
+        }
+      }
+
+      .hero-description {
+        font-size: 1.25rem;
+        max-width: 600px;
+        margin-bottom: 2.5rem;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease 0.4s forwards;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .hero-cta {
+        display: flex;
+        gap: 1rem;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease 0.6s forwards;
+      }
+
+      .btn {
+        padding: 1rem 2rem;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: 600;
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .btn-primary {
+        background: var(--orange);
+        color: var(--white);
+        border: 2px solid var(--orange);
+      }
+
+      .btn-primary:hover {
+        background: var(--orange-hover);
+        border-color: var(--orange-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: var(--white);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .btn-secondary:hover {
+        background: var(--white);
+        color: var(--navy);
+        transform: translateY(-2px);
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Section Styles */
+      section {
+        padding: 6rem 0;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+
+      .section-tag {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background: rgba(255, 107, 53, 0.1);
+        color: var(--orange);
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border-radius: 20px;
+        margin-bottom: 1rem;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        color: var(--navy);
+        margin-bottom: 1rem;
+      }
+
+      .section-subtitle {
+        color: var(--gray-medium);
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* Value Proposition */
+      .value-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .value-card {
+        background: var(--white);
+        padding: 2.5rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 30px rgba(0, 0, 0, 0.05);
+        transition: var(--transition);
+        border-top: 4px solid var(--orange);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .value-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          var(--navy) 0%,
+          var(--navy-light) 100%
+        );
+        opacity: 0;
+        transition: var(--transition);
+        z-index: 0;
+      }
+
+      .value-card:hover::before {
+        opacity: 1;
+      }
+
+      .value-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .value-card > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .value-card:hover h3,
+      .value-card:hover p,
+      .value-card:hover li {
+        color: var(--white);
+      }
+
+      .value-card:hover .value-icon {
+        background: var(--orange);
+        color: var(--white);
+      }
+
+      .value-icon {
+        width: 60px;
+        height: 60px;
+        background: rgba(255, 107, 53, 0.1);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: var(--orange);
+        margin-bottom: 1.5rem;
+        transition: var(--transition);
+      }
+
+      .value-card h3 {
+        font-size: 1.5rem;
+        color: var(--navy);
+        margin-bottom: 1rem;
+        transition: var(--transition);
+      }
+
+      .value-card p {
+        color: var(--gray-medium);
+        margin-bottom: 1rem;
+        transition: var(--transition);
+      }
+
+      .value-card ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .value-card li {
+        padding: 0.5rem 0;
+        color: var(--gray-dark);
+        font-size: 0.95rem;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .value-card li::before {
+        content: "→";
+        color: var(--orange);
+        font-weight: bold;
+      }
+
+      /* Case Study */
+      .case-study {
+        background: var(--gray-light);
+      }
+
+      .case-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .case-content h3 {
+        font-size: 2rem;
+        color: var(--navy);
+        margin-bottom: 1.5rem;
+      }
+
+      .case-meta {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .case-meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+        color: var(--gray-medium);
+      }
+
+      .case-meta-item i {
+        color: var(--orange);
+      }
+
+      .case-description {
+        margin-bottom: 2rem;
+        line-height: 1.8;
+      }
+
+      .case-highlights {
+        background: var(--white);
+        padding: 2rem;
+        border-radius: 10px;
+        border-left: 4px solid var(--orange);
+      }
+
+      .case-highlights h4 {
+        color: var(--navy);
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+      }
+
+      .case-highlights ul {
+        list-style: none;
+      }
+
+      .case-highlights li {
+        padding: 0.5rem 0;
+        padding-left: 1.5rem;
+        position: relative;
+      }
+
+      .case-highlights li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--orange);
+        font-weight: bold;
+      }
+
+      .case-visual {
+        position: relative;
+      }
+
+      .case-image {
+        background: var(--navy);
+        border-radius: 10px;
+        padding: 3rem;
+        color: var(--white);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .case-image::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 10px,
+          rgba(255, 255, 255, 0.03) 10px,
+          rgba(255, 255, 255, 0.03) 20px
+        );
+        animation: move 20s linear infinite;
+      }
+
+      @keyframes move {
+        0% {
+          transform: translate(0, 0);
+        }
+        100% {
+          transform: translate(50px, 50px);
+        }
+      }
+
+      .case-image h4 {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .metric {
+        display: inline-block;
+        margin: 1rem;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        position: relative;
+        z-index: 1;
+        backdrop-filter: blur(10px);
+      }
+
+      .metric-value {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--orange);
+        display: block;
+      }
+
+      .metric-label {
+        font-size: 0.9rem;
+        opacity: 0.9;
+      }
+
+      /* Skills Section */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+
+      .skill-category {
+        background: var(--white);
+        padding: 2rem;
+        border-radius: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        transition: var(--transition);
+      }
+
+      .skill-category:hover {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        transform: translateY(-3px);
+      }
+
+      .skill-category h3 {
+        color: var(--navy);
+        margin-bottom: 1.5rem;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .skill-category h3 i {
+        color: var(--orange);
+      }
+
+      .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .skill-tag {
+        padding: 0.5rem 1rem;
+        background: var(--gray-light);
+        border-radius: 20px;
+        font-size: 0.85rem;
+        color: var(--gray-dark);
+        transition: var(--transition);
+      }
+
+      .skill-tag:hover {
+        background: var(--navy);
+        color: var(--white);
+        cursor: default;
+      }
+
+      /* Experience Timeline */
+      .timeline {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 2px;
+        height: 100%;
+        background: linear-gradient(to bottom, var(--orange), var(--navy));
+      }
+
+      .timeline-item {
+        margin-bottom: 3rem;
+        position: relative;
+        width: 50%;
+        padding: 0 2rem;
+      }
+
+      .timeline-item:nth-child(odd) {
+        left: 0;
+        text-align: right;
+      }
+
+      .timeline-item:nth-child(even) {
+        left: 50%;
+      }
+
+      .timeline-dot {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: var(--orange);
+        border-radius: 50%;
+        top: 0;
+        border: 4px solid var(--white);
+        box-shadow: 0 0 0 2px var(--orange);
+      }
+
+      .timeline-item:nth-child(odd) .timeline-dot {
+        right: -10px;
+      }
+
+      .timeline-item:nth-child(even) .timeline-dot {
+        left: -10px;
+      }
+
+      .timeline-content {
+        background: var(--white);
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        position: relative;
+      }
+
+      .timeline-date {
+        color: var(--orange);
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .timeline-title {
+        color: var(--navy);
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .timeline-company {
+        color: var(--gray-medium);
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+      }
+
+      .timeline-desc {
+        font-size: 0.95rem;
+        color: var(--gray-dark);
+        line-height: 1.6;
+      }
+
+      /* Education & Certs */
+      .edu-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .edu-card {
+        background: var(--white);
+        padding: 2rem;
+        border-radius: 10px;
+        border: 2px solid transparent;
+        transition: var(--transition);
+        position: relative;
+      }
+
+      .edu-card:hover {
+        border-color: var(--orange);
+        transform: translateY(-3px);
+      }
+
+      .edu-badge {
+        position: absolute;
+        top: -10px;
+        right: 2rem;
+        background: var(--orange);
+        color: var(--white);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+
+      .edu-card h3 {
+        color: var(--navy);
+        margin-bottom: 0.5rem;
+      }
+
+      .edu-school {
+        color: var(--gray-medium);
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+      }
+
+      .edu-details {
+        font-size: 0.9rem;
+        color: var(--gray-dark);
+      }
+
+      .edu-details li {
+        margin-bottom: 0.5rem;
+        list-style: none;
+        position: relative;
+        padding-left: 1.2rem;
+      }
+
+      .edu-details li::before {
+        content: "▸";
+        position: absolute;
+        left: 0;
+        color: var(--orange);
+      }
+
+      /* Capstone Project */
+      .capstone {
+        background: var(--navy);
+        color: var(--white);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .capstone::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50%;
+        height: 100%;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></svg>');
+        background-size: 100px;
+        opacity: 0.5;
+      }
+
+      .capstone-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .capstone-content h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .capstone-content .lead {
+        font-size: 1.25rem;
+        opacity: 0.9;
+        margin-bottom: 2rem;
+      }
+
+      .capstone-features {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .capstone-feature {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.95rem;
+      }
+
+      .capstone-feature i {
+        color: var(--orange);
+      }
+
+      .capstone-badge {
+        display: inline-block;
+        background: var(--orange);
+        color: var(--white);
+        padding: 0.75rem 1.5rem;
+        border-radius: 5px;
+        font-weight: 600;
+      }
+
+      .capstone-visual {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 3rem;
+        text-align: center;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .capstone-icon {
+        font-size: 4rem;
+        color: var(--orange);
+        margin-bottom: 1rem;
+      }
+
+      /* Contact */
+      .contact {
+        text-align: center;
+        background: var(--gray-light);
+      }
+
+      .contact-content {
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .contact h2 {
+        font-size: 2.5rem;
+        color: var(--navy);
+        margin-bottom: 1.5rem;
+      }
+
+      .contact-description {
+        font-size: 1.2rem;
+        color: var(--gray-medium);
+        margin-bottom: 3rem;
+        line-height: 1.8;
+      }
+
+      .contact-info {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        margin-bottom: 3rem;
+        flex-wrap: wrap;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: var(--gray-dark);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .contact-item:hover {
+        color: var(--orange);
+        transform: translateY(-2px);
+      }
+
+      .contact-item i {
+        font-size: 1.2rem;
+        color: var(--orange);
+      }
+
+      .availability {
+        background: var(--white);
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        margin-top: 2rem;
+      }
+
+      .availability-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #28a745;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .availability-status::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        background: #28a745;
+        border-radius: 50%;
+        animation: pulse-green 2s infinite;
+      }
+
+      @keyframes pulse-green {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+
+      /* Footer */
+      footer {
+        background: var(--navy);
+        color: var(--white);
+        text-align: center;
+        padding: 2rem 0;
+        font-size: 0.9rem;
+      }
+
+      footer a {
+        color: var(--orange);
+        text-decoration: none;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2.5rem;
+        }
+
+        .hero-tagline {
+          font-size: 1.5rem;
+          height: 2.5rem;
+        }
+
+        @keyframes slideUp {
+          0%,
+          33% {
+            transform: translateY(0);
+          }
+          36%,
+          66% {
+            transform: translateY(-2.5rem);
+          }
+          69%,
+          100% {
+            transform: translateY(-5rem);
+          }
+        }
+
+        .case-container,
+        .capstone-container {
+          grid-template-columns: 1fr;
+        }
+
+        .timeline::before {
+          left: 20px;
+        }
+
+        .timeline-item {
+          width: 100%;
+          left: 0 !important;
+          padding-left: 3rem;
+          text-align: left !important;
+        }
+
+        .timeline-dot {
+          left: 10px !important;
+          right: auto !important;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .contact-info {
+          flex-direction: column;
+          gap: 1rem;
+        }
+      }
+
+      /* Scroll animations */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 0.8s ease,
+          transform 0.8s ease;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 420px 1fr;
+        align-items: center;
+        gap: 4rem;
+      }
+
+      .hero-image {
+        display: flex;
+        justify-content: center;
+      }
+
+      .hero-image img {
+        width: 100%;
+        max-width: 380px;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        border: 4px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .hero-content {
+        max-width: 650px;
+      }
+
+      /* Showcase Section */
+
+      .showcase-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .showcase-card {
+        background: var(--white);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
+        transition: var(--transition);
+      }
+
+      .showcase-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .showcase-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .showcase-content {
+        padding: 1.5rem;
+      }
+
+      .showcase-content h3 {
+        color: var(--navy);
+        margin-bottom: 0.75rem;
+      }
+
+      .showcase-content p {
+        color: var(--gray-medium);
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+      }
+
+      .showcase-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .showcase-tags span {
+        background: var(--gray-light);
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+        border-radius: 20px;
+      }
+
+      .showcase-list {
+        list-style: none;
+        padding: 0;
+        margin-top: 1rem;
+      }
+
+      .showcase-list li {
+        padding: 6px 0;
+        font-size: 0.95rem;
+        color: var(--gray-dark);
+        display: flex;
+        align-items: center;
+      }
+
+      .showcase-list li::before {
+        content: "▸";
+        color: var(--orange);
+        margin-right: 8px;
+      }
+      .showcase-category {
+        margin-top: 50px;
+        margin-bottom: 20px;
+        color: var(--navy);
+        font-size: 1.4rem;
+      }
+
+      .showcase-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+
+      .project-card {
+        background: var(--white);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+        transition: var(--transition);
+      }
+
+      .project-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+      }
+
+      .project-card h4 {
+        color: var(--navy);
+        margin-bottom: 10px;
+      }
+
+      .project-card p {
+        font-size: 0.9rem;
+        color: var(--gray-medium);
+        margin-bottom: 12px;
+      }
+
+      .project-tag {
+        display: inline-block;
+        background: var(--orange);
+        color: white;
+        padding: 4px 10px;
+        font-size: 0.75rem;
+        border-radius: 20px;
+      }
+
+      .project-tag.aws {
+        background: #ff9900;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav id="navbar">
+      <div class="nav-container">
+        <a href="#" class="logo">R.J.C. Liwag</a>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#expertise">Expertise</a></li>
+          <li><a href="#case-study">Case Study</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="about">
+      <div class="hero-container hero-grid">
+        <!-- LEFT SIDE IMAGE -->
+        <div class="hero-image">
+          <img src="./img/profile.jpg" alt="R.J.C. Liwag" />
+        </div>
+
+        <!-- RIGHT SIDE TEXT -->
+        <div class="hero-content">
+          <p class="hero-subtitle">
+            Technical Project Lead & AWS Cloud Administrator
+          </p>
+          <h1 class="hero-title">R.J.C. Liwag</h1>
+
+          <div class="hero-tagline">
+            <span class="tagline-text">
+              I Plan.<br />
+              I Execute.<br />
+              I Deploy.
+            </span>
+          </div>
+
+          <p class="hero-description">
+            Technical Project Lead with hands-on experience in AWS cloud
+            infrastructure, system development, and enterprise project delivery.
+            I design, deploy, and manage production systems while leading teams
+            and aligning technology with business goals.
+          </p>
+
+          <div class="hero-cta">
+            <a href="#case-study" class="btn btn-primary">
+              <i class="fas fa-briefcase"></i> View Case Studies
+            </a>
+            <a href="#contact" class="btn btn-secondary">
+              <i class="fas fa-envelope"></i> Get In Touch
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Value Proposition -->
+    <section id="expertise">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="section-tag">Core Competencies</span>
+          <h2 class="section-title">The Triple Threat</h2>
+          <p class="section-subtitle">
+            Three disciplines, one seamless delivery pipeline. I don't just
+            manage projects—I architect solutions and write the code that runs
+            them.
+          </p>
+        </div>
+
+        <div class="value-grid">
+          <div class="value-card fade-in">
+            <div class="value-icon">
+              <i class="fas fa-tasks"></i>
+            </div>
+            <h3>Project Leadership</h3>
+            <p>End-to-end delivery from planning to deployment</p>
+            <ul>
+              <li>Agile/Scrum & Waterfall methodologies</li>
+              <li>800K–3M PHP budget management</li>
+              <li>External vendor coordination</li>
+              <li>6-month project lifecycles</li>
+              <li>Cross-functional team leadership</li>
+            </ul>
+          </div>
+
+          <div class="value-card fade-in">
+            <div class="value-icon">
+              <i class="fas fa-cloud"></i>
+            </div>
+            <h3>Cloud Operations</h3>
+            <p>Seven AWS accounts, 20+ systems deployed</p>
+            <ul>
+              <li>AWS Certified Cloud Practitioner</li>
+              <li>EC2, RDS, S3 core infrastructure</li>
+              <li>First-level incident response</li>
+              <li>Cost optimization & security</li>
+              <li>Windows Server & Linux administration</li>
+            </ul>
+          </div>
+
+          <div class="value-card fade-in">
+            <div class="value-icon">
+              <i class="fas fa-code"></i>
+            </div>
+            <h3>Full-Stack Delivery</h3>
+            <p>Technical PM who still writes production code</p>
+            <ul>
+              <li>PHP, JavaScript, jQuery, MySQL</li>
+              <li>Kotlin, Node.js, Firebase</li>
+              <li>HTML5, CSS3, responsive design</li>
+              <li>WordPress & custom CMS</li>
+              <li>Mobile & web application architecture</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Study -->
+    <section class="case-study" id="case-study">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="section-tag">Crisis Response</span>
+          <h2 class="section-title">Public Website Outage Resolution</h2>
+        </div>
+
+        <div class="case-container">
+          <div class="case-content fade-in">
+            <h3>When Traffic Overwhelmed Infrastructure</h3>
+            <div class="case-meta">
+              <div class="case-meta-item">
+                <i class="fas fa-building"></i>
+                <span>Manufacturing Sector</span>
+              </div>
+              <div class="case-meta-item">
+                <i class="fas fa-clock"></i>
+                <span>Critical Response</span>
+              </div>
+              <div class="case-meta-item">
+                <i class="fas fa-user-tie"></i>
+                <span>Technical Lead + AWS Admin</span>
+              </div>
+            </div>
+
+            <div class="case-description">
+              <p>
+                <strong>The Challenge:</strong> Company public website
+                experienced critical downtime during peak business hours due to
+                unexpected traffic surge overwhelming existing infrastructure.
+              </p>
+              <br />
+              <p>
+                <strong>My Role:</strong> As Technical Project Lead with
+                hands-on AWS administration capabilities, I led the immediate
+                response while coordinating with stakeholders and external
+                vendors.
+              </p>
+            </div>
+
+            <div class="case-highlights">
+              <h4>Resolution Strategy</h4>
+              <ul>
+                <li>
+                  <strong>Immediate:</strong> Upscaled EC2 instances to
+                  accommodate traffic surge and restore service within SLA
+                </li>
+                <li>
+                  <strong>Short-term:</strong> Implemented enhanced monitoring
+                  and alerting systems to prevent recurrence
+                </li>
+                <li>
+                  <strong>Long-term:</strong> Architected auto-scaling policies
+                  and cost-optimized reserved capacity planning
+                </li>
+              </ul>
+            </div>
+
+            <p
+              style="
+                margin-top: 1.5rem;
+                font-style: italic;
+                color: var(--gray-medium);
+              "
+            >
+              "This is what 'I execute' means—decisive action when systems are
+              down, not just project plans on paper."
+            </p>
+          </div>
+
+          <div class="case-visual fade-in">
+            <div class="case-image">
+              <h4>Impact Metrics</h4>
+              <div class="metric">
+                <span class="metric-value">0</span>
+                <span class="metric-label">Recurring Outages</span>
+              </div>
+              <div class="metric">
+                <span class="metric-value">SLA</span>
+                <span class="metric-label">Restored Within</span>
+              </div>
+              <div class="metric">
+                <span class="metric-value">7</span>
+                <span class="metric-label">AWS Accounts Managed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="section-tag">Technical Arsenal</span>
+          <h2 class="section-title">Tools & Technologies</h2>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-category fade-in">
+            <h3><i class="fab fa-aws"></i> Cloud & Infrastructure</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">AWS Certified CCP</span>
+              <span class="skill-tag">EC2</span>
+              <span class="skill-tag">RDS</span>
+              <span class="skill-tag">S3</span>
+              <span class="skill-tag">VPC</span>
+              <span class="skill-tag">DNS</span>
+              <span class="skill-tag">SSL</span>
+              <span class="skill-tag">IAM</span>
+              <span class="skill-tag">Windows Server</span>
+              <span class="skill-tag">Linux</span>
+            </div>
+          </div>
+
+          <div class="skill-category fade-in">
+            <h3><i class="fas fa-code"></i> Development</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">PHP</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">jQuery</span>
+              <span class="skill-tag">HTML5</span>
+              <span class="skill-tag">CSS3</span>
+              <span class="skill-tag">MySQL</span>
+              <span class="skill-tag">Kotlin</span>
+              <span class="skill-tag">Node.js</span>
+              <span class="skill-tag">Firebase</span>
+              <span class="skill-tag">WordPress</span>
+              <span class="skill-tag">CMS</span>
+            </div>
+          </div>
+
+          <div class="skill-category fade-in">
+            <h3><i class="fas fa-project-diagram"></i> Project Management</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Agile</span>
+              <span class="skill-tag">Scrum</span>
+              <span class="skill-tag">Waterfall</span>
+              <span class="skill-tag">Vendor Management</span>
+              <span class="skill-tag">Budget 800K-3M PHP</span>
+              <span class="skill-tag">Stakeholder Reporting</span>
+            </div>
+          </div>
+
+          <div class="skill-category fade-in">
+            <h3><i class="fas fa-shield-alt"></i> Operations</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Incident Response</span>
+              <span class="skill-tag">System Monitoring</span>
+              <span class="skill-tag">Cost Optimization</span>
+              <span class="skill-tag">Security Best Practices</span>
+              <span class="skill-tag">Backup & Recovery</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" style="background: var(--gray-light)">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="section-tag">Career Path</span>
+          <h2 class="section-title">Professional Experience</h2>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item fade-in">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">Sept 2024 – Feb 2026</div>
+              <h3 class="timeline-title">
+                AWS Cloud Practitioner / Project Lead
+              </h3>
+              <div class="timeline-company">
+                Yamaha Motor Philippines, LIMA Technology Center
+              </div>
+              <div class="timeline-desc">
+                Led end-to-end delivery of IT and cloud projects. Managed AWS
+                infrastructure across seven accounts, performed first-level
+                incident response, and coordinated with third-party vendors.
+                Administered servers, backups, and maintained project
+                documentation while ensuring cost optimization and security
+                compliance.
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item fade-in">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">Feb 2024 – May 2024</div>
+              <h3 class="timeline-title">IT Internship</h3>
+              <div class="timeline-company">
+                Yamaha Motor Philippines, LIMA Technology Center
+              </div>
+              <div class="timeline-desc">
+                Assisted in evaluating project management and secure coding
+                tools. Supported development and maintenance of web-based
+                systems using CMS. Collaborated on troubleshooting technical
+                issues and documented procedures.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Capstone Project -->
+    <section class="capstone">
+      <div class="container">
+        <div class="capstone-container">
+          <div class="capstone-content fade-in">
+            <span
+              class="section-tag"
+              style="background: rgba(255, 255, 255, 0.1); color: var(--white)"
+              >Capstone Project</span
+            >
+            <h2>SerbisyoNow</h2>
+            <p class="lead">
+              Service Provider Application Platform for Skilled Workers
+            </p>
+            <p style="margin-bottom: 2rem; opacity: 0.9">
+              A comprehensive mobile-first platform connecting skilled workers
+              with clients in real-time. Features include secure user
+              authentication, intelligent booking management, GPS-based service
+              matching, and a comprehensive admin dashboard. Built with modern
+              mobile development using Kotlin for Android, Node.js backend
+              services, and Firebase for real-time data synchronization.
+            </p>
+
+            <div class="capstone-features">
+              <div class="capstone-feature">
+                <i class="fas fa-check-circle"></i>
+                <span>User Authentication</span>
+              </div>
+              <div class="capstone-feature">
+                <i class="fas fa-check-circle"></i>
+                <span>Booking Management</span>
+              </div>
+              <div class="capstone-feature">
+                <i class="fas fa-check-circle"></i>
+                <span>GPS Service Matching</span>
+              </div>
+              <div class="capstone-feature">
+                <i class="fas fa-check-circle"></i>
+                <span>Real-time Sync</span>
+              </div>
+              <div class="capstone-feature">
+                <i class="fas fa-check-circle"></i>
+                <span>Admin Dashboard</span>
+              </div>
+              <div class="capstone-feature">
+                <i class="fas fa-check-circle"></i>
+                <span>Mobile-First Design</span>
+              </div>
+            </div>
+
+            <span class="capstone-badge">
+              <i class="fas fa-award"></i> Best in Capstone Project
+            </span>
+          </div>
+
+          <div class="capstone-visual fade-in">
+            <div class="capstone-icon">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h3>Tech Stack</h3>
+            <div
+              class="skill-tags"
+              style="justify-content: center; margin-top: 1rem"
+            >
+              <span
+                class="skill-tag"
+                style="
+                  background: rgba(255, 255, 255, 0.1);
+                  color: var(--white);
+                "
+                >Kotlin</span
+              >
+              <span
+                class="skill-tag"
+                style="
+                  background: rgba(255, 255, 255, 0.1);
+                  color: var(--white);
+                "
+                >Node.js</span
+              >
+              <span
+                class="skill-tag"
+                style="
+                  background: rgba(255, 255, 255, 0.1);
+                  color: var(--white);
+                "
+                >Firebase</span
+              >
+              <span
+                class="skill-tag"
+                style="
+                  background: rgba(255, 255, 255, 0.1);
+                  color: var(--white);
+                "
+                >HTML/CSS</span
+              >
+              <span
+                class="skill-tag"
+                style="
+                  background: rgba(255, 255, 255, 0.1);
+                  color: var(--white);
+                "
+                >JavaScript</span
+              >
+            </div>
+            <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.8">
+              Android • Backend API • Real-time Database
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="section-tag">Academic Background</span>
+          <h2 class="section-title">Education & Certifications</h2>
+        </div>
+
+        <div class="edu-grid">
+          <div class="edu-card fade-in">
+            <div class="edu-badge">Latin Honors</div>
+            <h3>Bachelor of Science in Information Technology</h3>
+            <div class="edu-school">
+              Batangas State University – JPLPC Malvar
+            </div>
+            <ul class="edu-details">
+              <li>Graduated with Latin Honors (GPA: 1.88)</li>
+              <li>Best in Capstone Project: SerbisyoNow</li>
+              <li>2020 – 2024</li>
+            </ul>
+          </div>
+
+          <div class="edu-card fade-in">
+            <div class="edu-badge">AWS Certified</div>
+            <h3>AWS Certified Cloud Practitioner</h3>
+            <div class="edu-school">Amazon Web Services</div>
+            <ul class="edu-details">
+              <li>Validated understanding of AWS core services</li>
+              <li>Cloud architecture & security best practices</li>
+              <li>Cost optimization strategies</li>
+              <li>May 2025</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Showcase -->
+    <section id="showcase">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="section-tag">Portfolio</span>
+          <h2 class="section-title">Systems I've Worked On</h2>
+          <p class="section-subtitle">
+            Projects across leadership, development, and AWS cloud
+            infrastructure.
+          </p>
+        </div>
+
+        <!-- PROJECT LEAD -->
+        <h3 class="showcase-category">Project Leadership</h3>
+
+        <div class="showcase-grid">
+          <div class="project-card fade-in">
+            <h4>Visitor Management System</h4>
+            <p>Enterprise visitor tracking and facility access monitoring.</p>
+            <span class="project-tag">Project Lead</span>
+          </div>
+
+          <div class="project-card fade-in">
+            <h4>3S Portal</h4>
+            <p>Dealer service and operations management platform.</p>
+            <span class="project-tag">Project Lead</span>
+          </div>
+
+          <div class="project-card fade-in">
+            <h4>DND Maintenance System</h4>
+            <p>Internal system for monitoring maintenance operations.</p>
+            <span class="project-tag">Project Lead</span>
+          </div>
+
+          <div class="project-card fade-in">
+            <h4>DND LMS</h4>
+            <p>Learning platform for internal training and development.</p>
+            <span class="project-tag">Project Lead</span>
+          </div>
+
+          <div class="project-card fade-in">
+            <h4>Advanced Service Kiosk</h4>
+            <p>Automated service kiosk platform for customer interaction.</p>
+            <span class="project-tag">Project Lead</span>
+          </div>
+
+          <div class="project-card fade-in">
+            <h4>Christmas Promo Platform</h4>
+            <p>Campaign system supporting marketing promotions.</p>
+            <span class="project-tag">Project Lead</span>
+          </div>
+
+          <div class="project-card fade-in">
+            <h4>Executive Management Approval System</h4>
+            <p>Digital workflow for executive-level approvals.</p>
+            <span class="project-tag">Project Lead</span>
+          </div>
+        </div>
+
+        <!-- DEVELOPMENT -->
+        <h3 class="showcase-category">System Development</h3>
+
+        <div class="showcase-grid">
+          <div class="project-card fade-in">
+            <h4>Yamaha Day System</h4>
+            <p>Internal event management system.</p>
+            <span class="project-tag">Developer</span>
+          </div>
+
+          <div class="project-card fade-in">
+            <h4>Recruitment Portal</h4>
+            <p>Public-facing recruitment platform.</p>
+            <span class="project-tag">Developer</span>
+          </div>
+
+          <div class="project-card fade-in">
+            <h4>System Development Request</h4>
+            <p>Internal request workflow for system development.</p>
+            <span class="project-tag">Developer</span>
+          </div>
+
+          <div class="project-card fade-in">
+            <h4>Payslip System</h4>
+            <p>Employee payroll and payslip access system.</p>
+            <span class="project-tag">Developer</span>
+          </div>
+        </div>
+
+        <!-- AWS -->
+        <h3 class="showcase-category">AWS Cloud Deployments</h3>
+
+        <div class="showcase-grid">
+          <div class="project-card fade-in">
+            <h4>Recruitment Portal</h4>
+            <span class="project-tag aws">AWS Deployment</span>
+          </div>
+
+          <div class="project-card fade-in">
+            <h4>Learning Management System</h4>
+            <span class="project-tag aws">AWS Deployment</span>
+          </div>
+
+          <div class="project-card fade-in">
+            <h4>Yamaha Website</h4>
+            <span class="project-tag aws">AWS Deployment</span>
+          </div>
+
+          <div class="project-card fade-in">
+            <h4>Yamaha Outdoor</h4>
+            <span class="project-tag aws">AWS Deployment</span>
+          </div>
+
+          <div class="project-card fade-in">
+            <h4>ASK Portal</h4>
+            <span class="project-tag aws">AWS Deployment</span>
+          </div>
+
+          <div class="project-card fade-in">
+            <h4>3S Portal</h4>
+            <span class="project-tag aws">AWS Deployment</span>
+          </div>
+
+          <div class="project-card fade-in">
+            <h4>DND Web</h4>
+            <span class="project-tag aws">AWS Deployment</span>
+          </div>
+
+          <div class="project-card fade-in">
+            <h4>DND Maintenance System</h4>
+            <span class="project-tag aws">AWS Deployment</span>
+          </div>
+
+          <div class="project-card fade-in">
+            <h4>Visitor Management System</h4>
+            <span class="project-tag aws">AWS Deployment</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="contact-content fade-in">
+          <span class="section-tag">Let's Connect</span>
+          <h2>Ready to Execute Your Next Project?</h2>
+          <p class="contact-description">
+            I'm currently open to technical project lead and cloud administrator
+            roles in the Greater Manila Area or remote positions. If you need
+            someone who can plan the roadmap, manage the team, and fix the
+            server when it breaks—let's talk.
+          </p>
+
+          <div class="contact-info">
+            <a href="mailto:rjliwag221@gmail.com" class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>rjliwag221@gmail.com</span>
+            </a>
+            <a href="tel:09931279802" class="contact-item">
+              <i class="fas fa-phone"></i>
+              <span>0993 127 9802</span>
+            </a>
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Talisay, Batangas</span>
+            </div>
+          </div>
+
+          <div class="availability">
+            <div class="availability-status">Available for Opportunities</div>
+            <p style="color: var(--gray-medium); font-size: 0.95rem">
+              Open to full-time roles, project-based consulting, and technical
+              leadership positions
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <p>
+          &copy; 2026 R.J.C. Liwag. Built with precision. Deployed with
+          confidence.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Navbar scroll effect
+      window.addEventListener("scroll", function () {
+        const navbar = document.getElementById("navbar");
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      // Intersection Observer for fade-in animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".fade-in").forEach((el) => {
+        observer.observe(el);
+      });
+
+      // Smooth scroll for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
+'''
